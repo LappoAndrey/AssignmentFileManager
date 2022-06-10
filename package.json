@@ -1,0 +1,19 @@
+{
+  "name": "assignmentfilemanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LappoAndrey/AssignmentFileManager.git"
+  },
+  "author": "LappoAndrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LappoAndrey/AssignmentFileManager/issues"
+  },
+  "homepage": "https://github.com/LappoAndrey/AssignmentFileManager#readme"
+}
