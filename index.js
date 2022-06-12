@@ -6,6 +6,8 @@ import { rename } from "./js/fs/rename.js";
 import { copy } from "./js/fs/copy.js";
 import { remove } from "./js/fs/delete.js";
 import { calculateHash } from "./js/hash/calcHash.js";
+import { compress } from "./js/zip/compress.js";
+import { decompress } from "./js/zip/decompress.js";
 
 import os from "os";
 import fs from "fs";
@@ -96,12 +98,55 @@ export const start = async (oldFile, newFile) => {
           });
         }
         break;
+
+      case "os":
+        {
+          switch (inputStdin.toString().trim().split(" ")[1]) {
+            case "--EOL":
+              {
+                console.log(JSON.stringify(os.EOL));
+              }
+              break;
+            case "--cpus":
+              {
+                console.log(os.cpus());
+              }
+              break;
+            case "--homedir":
+              {
+                console.log(os.homedir());
+              }
+              break;
+            case "--username":
+              {
+                console.log(os.userInfo().username);
+              }
+              break;
+            case "--architecture":
+              {
+                console.log(os.arch());
+              }
+              break;
+            default:
+              console.log("Invalid input");
+          }
+          console.log(`You are currently in ${currentCat}`);
+        }
+
+        break;
+
+      case "compress": {
+        compress(workFile, toFile, currentCat);
+      }
+
+      case "decompress": {
+        decompress(workFile, toFile, currentCat);
+      }
+
       default:
         console.log("Invalid input");
     }
   });
-
-  // .on("data", (data) => process.stdout.write(data));
 };
 
 start();

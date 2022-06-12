@@ -1,18 +1,19 @@
-import { createGzip } from "node:zlib";
+import zlib from "zlib";
+import fs from "fs";
 import { pipeline } from "node:stream";
-import { createReadStream, createWriteStream } from "node:fs";
 
-export const compress = async () => {
-  const gzip = createGzip();
-  const source = createReadStream("./files/fileToCompress.txt");
-  const destination = createWriteStream("./files/archive.gz");
+export const compress = async (workFile, toFile, currentCat) => {
+  const gzip = zlib.createBrotliCompress();
+  const source = fs.createReadStream(workFile);
+  const destination = fs.createWriteStream(toFile);
 
-  pipeline(source, gzip, destination, (err) => {
+  const onError = (err) => {
     if (err) {
       console.error("An error occurred:", err);
       process.exitCode = 1;
     }
-  });
-};
+  };
 
-compress();
+  pipeline(source, gzip, destination, onError);
+  console.log(`You are currently in ${currentCat}`);
+};
